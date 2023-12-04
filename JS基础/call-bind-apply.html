@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    Function.prototype.call1 = function (source) {
+      source.tempFunc = this
+      source.tempFunc()
+      delete source.tempFunc
+    }
+
+    function fun(b) {
+      console.log(this.a, b)
+    }
+
+    let source = { a: 12323 }
+    fun.call1(source)
+
+    Function.prototype.bind1 = function (source) {
+      source.tempFunc = this
+
+      return function (params) {
+        source.tempFunc(params)
+      }
+    }
+
+    const fn1 = fun.bind1(source)
+    fn1('asd')
+    fn1('edf')
+
+
+
+
+  </script>
+
+</body>
+
+</html>

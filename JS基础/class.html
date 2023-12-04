@@ -12,7 +12,6 @@
   <script>
     class People {
       constructor(name, age) {
-
         this.name = name
         this.age = age
       }
@@ -37,6 +36,18 @@
 
     console.log(tecWang.techStudent());
 
+
+    console.log(typeof People);
+    console.log(typeof Teacher);
+
+    console.log(tecWang.__proto__ === Teacher.prototype);
+    console.log(tecWang instanceof Teacher);
+    console.log(tecWang instanceof People);
+
+    console.log(Teacher.__proto__ === People);
+    console.log(People.__proto__ === Function.prototype);
+
+    console.log(Function.prototype.__proto__ === Object.prototype);
   </script>
 
 </body>
