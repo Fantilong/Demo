@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    class People {
+      constructor(name, age) {
+
+        this.name = name
+        this.age = age
+      }
+      eat() {
+        console.log(this.name, ' 吃饭');
+      }
+    }
+
+    const person = new People('小花', 28)
+    console.log(person.eat());
+
+    class Teacher extends People {
+      constructor(name, age, sex) {
+        super(name, age)
+        this.sex = sex
+      }
+      techStudent() {
+        console.log(this.name, this.sex, ' 教学生');
+      }
+    }
+    const tecWang = new Teacher('小王', 12, '男')
+
+    console.log(tecWang.techStudent());
+
+  </script>
+
+</body>
+
+</html>
