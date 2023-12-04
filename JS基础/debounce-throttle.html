@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="debounce">debounce</button>
+  <button id="throttle">throttle</button>
+
+  <script>
+    function throttle(fn, delay) {
+      let timer = null
+
+      return function () {
+        if (timer) return
+
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+          timer = null
+        }, delay);
+      }
+    }
+
+    document.querySelector('#throttle').addEventListener('click', debounce(function (params) {
+      console.log(this, params);
+    }, 1000))
+
+
+
+    function debounce(fn, delay) {
+      let timer = null
+
+      return function (event) {
+        if (timer) clearTimeout(timer)
+
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+          timer = null
+        }, delay);
+      }
+    }
+
+    document.querySelector('#debounce').addEventListener('click', throttle(function (params) {
+      console.log(this, params);
+    }, 2000))
+
+  </script>
+</body>
+
+</html>
