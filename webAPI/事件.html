@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button id="btn">button</button>
+
+  <div class="div">123123</div>
+
+  <script>
+    const btn = document.querySelector('#btn')
+    const body = document.querySelector('body')
+
+    function bindEvent(ele, type, selector, fn) {
+      if (!fn) {
+        fn = selector
+        selector = null
+      }
+
+      ele.addEventListener(type, (event) => {
+        const target = event.target
+        if (selector) {
+          if (target.matches(selector)) {
+            fn.call(event.target, event)
+          }
+        } else {
+          fn.call(event.target, event)
+        }
+      })
+    }
+
+    bindEvent(btn, 'click', function (event) {
+      event.preventDefault()
+      console.log(this.innerHTML, event.target);
+    })
+
+
+    bindEvent(body, 'click', '.div', function (event) {
+      event.preventDefault()
+      console.log(this.innerHTML, event.target);
+    })
+
+  </script>
+
+</body>
+
+</html>
