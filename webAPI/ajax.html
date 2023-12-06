@@ -47,6 +47,41 @@
     // }
     // xhr.send(JSON.stringify({ a: 123 }))
 
+
+    // const xmr = new XMLHttpRequest()
+    // xmr.open('Get', './test.json', true)
+    // xmr.onreadystatechange = () => {
+    //   if (xmr.readyState === 4) {
+    //     if (xmr.status === 200) {
+    //       alert(xmr.responseText)
+    //     }
+
+    //   }
+    // }
+    // xmr.send()
+
+    const $ajax = (method, url, param, async = true) => {
+      return new Promise((resolve, reject) => {
+        const xmr = new XMLHttpRequest()
+        xmr.open(method, url, async)
+        xmr.onreadystatechange = () => {
+          if (xmr.readyState === 4) {
+            if (xmr.status !== 200) {
+              reject(xmr.responseText)
+              return
+            }
+
+            resolve(JSON.parse(xmr.responseText))
+          }
+        }
+
+        xmr.send(param)
+      })
+    }
+
+    $ajax('GET', './test.json').then((res) => {
+      alert(res.name)
+    })
   </script>
 
 </body>
