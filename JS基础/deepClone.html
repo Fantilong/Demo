@@ -20,10 +20,23 @@
       arr: ['a', 'b', 'c']
     }
 
-    function deepClone(obj = {}) {
-      if (typeof obj !== 'object' || obj == null) return obj
-      const result = obj instanceof Array ? [] : {}
+    // function deepClone(obj = {}) {
+    //   if (typeof obj !== 'object' || obj == null) return obj
+    //   const result = obj instanceof Array ? [] : {}
 
+    //   for (const key in obj) {
+    //     if (Object.hasOwnProperty.call(obj, key)) {
+    //       result[key] = deepClone(obj[key])
+    //     }
+    //   }
+
+    //   return result
+    // }
+
+    function deepClone(obj = {}) {
+      if (typeof obj !== 'object' || obj === null) return obj
+
+      const result = obj instanceof Array ? [] : {}
       for (const key in obj) {
         if (Object.hasOwnProperty.call(obj, key)) {
           result[key] = deepClone(obj[key])
@@ -36,6 +49,32 @@
     const obj2 = deepClone(obj1)
 
     console.log(obj1.address === obj2.address);
+    console.log(obj1);
+    console.log(obj2);
+
+
+    function isObject(obj) { // 判断是引用类型
+      return typeof obj === 'object' && obj !== null
+    }
+    function isEqual(obj1, obj2) {
+      // 如果有一个不是引用类型，则直接判断
+      if (!isObject(obj1) || !isObject(obj2)) return obj1 === obj2
+
+      const obj1Keys = Object.keys(obj1)
+      const obj2Keys = Object.keys(obj2)
+
+      if (obj1Keys.length !== obj2Keys.length) return false
+
+      for (const key of obj1Keys) {
+        if (!isEqual(obj1[key], obj2[key])) return false
+      }
+
+      return true
+    }
+
+    obj1.age = 30
+    console.log(isEqual(obj1, obj2));
+
 
   </script>
 
